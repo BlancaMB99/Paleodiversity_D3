@@ -53,7 +53,7 @@ genus_data <- subset(occ_data, select=c(genus, accepted_name, occurrence_no, col
 
 ## To compute Good's u for each interval, we need to know the frequencies of each taxon (genus):
 tax_freq <- lapply(1:nrow(intervals), function(i) {
-  tmp <- genus_data %>% filter(max_ma >= intervals[i,"max_ma"] & min_ma <= intervals[i,"min_ma"]) %>% 
+  tmp <- genus_data %>% dplyr::filter(max_ma >= intervals[i,"max_ma"] & min_ma <= intervals[i,"min_ma"]) %>% 
     count(., genus) %>% arrange(desc(n)) %>% # count no. genera in each interval
     select(n)
   freq_raw <- as.numeric(tmp$n)
@@ -103,7 +103,7 @@ citation("iNEXT") # https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041
 ##      = there are 150 taxa in Interval_A, 99 in the first collection, 96 in the second, etc.
 
 ## 1. We've already got our intervals information from earlier, load that now if its not already in R:
-intervals <- read_csv("./data/intervals_Car_Tor.csv")
+intervals <- read.csv("./data/intervals_Car_Tor.csv")
 
 ## 2 + 3. Genus incidence frequencies for each interval
 ## This loop computes incidence frequences for each interval in the intervals data:
@@ -345,7 +345,7 @@ squares_plot <- ggplot(to_plot, aes(x = mid_ma, y = squares_list)) +
 squares_plot # call to plot tab
 
 ## Save a copy of the plot to the plots folder
-ggsave("./plots/squares_gen.pdf", plot = sauares_plot, 
+ggsave("./plots/squares_gen.pdf", plot = squares_plot, 
        width = 20, height = 14, units = "cm")
 
 
