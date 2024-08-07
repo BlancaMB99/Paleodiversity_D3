@@ -335,6 +335,8 @@ ggsave(plot = modern_map,
 # 6. Palaeogeographic maps ------------------------------------------------
 
 ## Now let's look at our occurrences on a world map with palaeogeographic rotations
+install.packages("geojsonsf")
+library (geojsonsf)
 
 ## First, create a new, simplified data object to build our palaeomap:
 paleomap_data <- occ_data %>% 
